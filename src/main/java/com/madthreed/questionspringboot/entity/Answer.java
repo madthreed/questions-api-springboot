@@ -1,6 +1,5 @@
 package com.madthreed.questionspringboot.entity;
 
-import com.madthreed.questionspringboot.dto.AnswerDto;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -15,6 +14,7 @@ import javax.persistence.*;
 @ToString
 @RequiredArgsConstructor
 public class Answer {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ans_id")
@@ -27,5 +27,4 @@ public class Answer {
     @JoinColumn(name = "que_id", updatable = false, insertable = false)
     @ToString.Exclude
     private Question question;
-
 }

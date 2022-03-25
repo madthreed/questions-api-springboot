@@ -1,6 +1,6 @@
 package com.madthreed.questionspringboot.dto;
 
-import com.madthreed.questionspringboot.entity.Question;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -13,5 +13,7 @@ import lombok.ToString;
 public class AnswerDto {
     private Long id;
     private String name;
+
+    @JsonBackReference
     private QuestionDto question;
 }

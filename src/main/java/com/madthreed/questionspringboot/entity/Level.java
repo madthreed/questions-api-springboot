@@ -22,6 +22,7 @@ public class Level {
     @Column(name = "lvl_name")
     private String name;
 
-    @OneToMany(mappedBy = "level")
+    @OneToMany(mappedBy = "level", fetch = FetchType.LAZY)
+    @ToString.Exclude
     private List<Question> questions;
 }

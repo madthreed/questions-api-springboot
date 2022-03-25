@@ -4,8 +4,10 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.hateoas.RepresentationModel;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,6 +17,7 @@ import java.util.List;
 @ToString
 @RequiredArgsConstructor
 public class Question {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "que_id")
@@ -25,16 +28,35 @@ public class Question {
 
     private Long numOfCorr;
 
-    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "question")
     @ToString.Exclude
     private List<Answer> answers;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "prof_id")
+    @ToString.Exclude
     private Profile profile;
 
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "lvl_id")
+    @ToString.Exclude
     private Level level;
+
+
+    void addAnswer(Answer answer) {
+        if (answers == null) {
+            answers = new ArrayList<>();
+        }
+
+        answers.add(answer);
+        answer.setQuestion(this);
+    }
+
+
+    void removeAnswer(Answer answer) {
+
+        answers.remove(answer);
+        answer.setQuestion(null);
+    }
 }

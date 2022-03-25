@@ -3,14 +3,12 @@ package com.madthreed.questionspringboot.controller;
 import com.madthreed.questionspringboot.dto.ProfileDto;
 import com.madthreed.questionspringboot.services.ProfileService;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping("/profile")
+@RequestMapping("/profiles")
 @AllArgsConstructor
 public class ProfileController {
     private final ProfileService profileService;
@@ -23,32 +21,32 @@ public class ProfileController {
     }
 
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/{id}")
     public ProfileDto getById(@PathVariable Long id) {
+
         return profileService.getById(id);
     }
 
 
     @PostMapping
-    public ResponseEntity<ProfileDto> create(@Valid @RequestBody ProfileDto profile) {
+    public ProfileDto create(@RequestBody ProfileDto dto) {
 
-        ProfileDto result= profileService.create(profile);
-        return ResponseEntity.ok(result);
+        return profileService.create(dto);
     }
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProfileDto> update(@PathVariable Long id, @Valid @RequestBody ProfileDto profile) {
+    public ProfileDto update(@PathVariable Long id, @RequestBody ProfileDto dto) {
 
-        ProfileDto result = profileService.update(id, profile);
-        return ResponseEntity.ok(result);
+        return profileService.update(id, dto);
     }
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) {
+    public void delete(@PathVariable Long id) {
+
         profileService.delete(id);
 
-        return ResponseEntity.ok("Profile deleted successfully");
+//        return ResponseEntity.ok("Profile deleted successfully");
     }
 }

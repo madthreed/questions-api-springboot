@@ -9,9 +9,9 @@ public interface ProfileService {
 
     ProfileDto getById(Long id);
 
-    ProfileDto create(ProfileDto profile);
+    ProfileDto create(ProfileDto profileDto);
 
-    ProfileDto update(Long id, ProfileDto profile);
+    ProfileDto update(Long id, ProfileDto profileDto);
 
     void delete(Long id);
 }

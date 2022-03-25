@@ -1,6 +1,6 @@
 package com.madthreed.questionspringboot.dto;
 
-import com.madthreed.questionspringboot.entity.Question;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -15,5 +15,7 @@ import java.util.List;
 public class LevelDto {
     private Long lvl_id;
     private String name;
+
+    @JsonBackReference
     private List<QuestionDto> questions;
 }

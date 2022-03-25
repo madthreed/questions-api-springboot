@@ -1,12 +1,11 @@
 package com.madthreed.questionspringboot.dto;
 
-import com.madthreed.questionspringboot.entity.Answer;
-import com.madthreed.questionspringboot.entity.Level;
-import com.madthreed.questionspringboot.entity.Profile;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.util.List;
 
@@ -14,12 +13,18 @@ import java.util.List;
 @Setter
 @ToString
 @RequiredArgsConstructor
-public class QuestionDto {
+public class QuestionDto  extends RepresentationModel<QuestionDto> {
     private Long id;
     private String name;
     private Long numOfCorr;
-    @ToString.Exclude
+
+//    @ToString.Exclude
+    @JsonManagedReference
     private List<AnswerDto> answers;
+
+    @JsonManagedReference
     private ProfileDto profile;
+
+    @JsonManagedReference
     private LevelDto level;
 }
